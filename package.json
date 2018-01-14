@@ -1,0 +1,27 @@
+{
+  "name": "wemo",
+  "version": "0.0.1",
+  "description": "WeMo Driver",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orandasoft/NEEO_WeMo.git"
+  },
+  "keywords": [
+    "NEEO",
+    "WeMo",
+    "Driver"
+  ],
+  "author": "Paul Spee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/orandasoft/NEEO_WeMo/issues"
+  },
+  "homepage": "https://github.com/orandasoft/NEEO_WeMo#readme",
+  "dependencies": {
+    "neeo-sdk": "^0.48.13"
+  }
+}
