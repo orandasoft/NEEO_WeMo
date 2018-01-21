@@ -95,8 +95,17 @@ function binaryStatusWeMoDevice(val, deviceid, devicetype) {
   switch (devicetype) {
     case "urn:Belkin:device:lightswitch:1":
       if (sendComponentUpdate) {
-        sendComponentUpdate({uniqueDeviceId: deviceid, component: 'wemoSwitch', value: val === 1 ? true : false});
-        console.log('sendComponentUpdate', deviceid, devicetype, val);
+        let bool = val === '1' ? true : false;
+        console.log('sendComponentUpdate', deviceid, devicetype, bool);
+        sendComponentUpdate({uniqueDeviceId: deviceid, component: 'wemoSwitch', value: bool})
+        .catch((error) => {
+          // filter spam errors:
+          // DUPLICATE_MESSAGE: if value didn't change since last update. SDK keeps the last value and only sends changed data to the brain.
+          // COMPONENTNAME_NOT_FOUND: sent if device is not yet add in NEEO
+          const level = (error.message === 'DUPLICATE_MESSAGE'
+            || error.message.startsWith('COMPONENTNAME_NOT_FOUND')) ? 'silly' : 'warn';
+          console.log('[CONTROLLER] Sending notification to brain failed:', deviceid, error.message);
+        });
       }
       break;
   }
