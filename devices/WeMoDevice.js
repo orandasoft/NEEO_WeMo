@@ -56,8 +56,11 @@ const controller = {
   switchGet: function switchGet(deviceid) {
     let client = wemoClients[deviceid];
     if (client) {
-      client.getBinaryState(function(err, value) {
-        return value === '1' ? true : false;
+      return new Promise((resolve, reject) => {
+        client.getBinaryState(function(err, value) {
+          console.log('switchGet ', value);
+          resolve( value === '1' ? true : false);
+        });
       });
     } else {
       wemo.discover(foundWeMoDevice);
@@ -93,7 +96,7 @@ const WeMoLightSwitch = neeoapi.buildDevice('WeMo LightSwitch')
 // function binaryStatusWeMoDevice() is called by the WeMo client to report a status change
 function binaryStatusWeMoDevice(val, deviceid, devicetype) {
   switch (devicetype) {
-    case "urn:Belkin:device:lightswitch:1":
+    case Wemo.DEVICE_TYPE.LightSwitch:
       if (sendComponentUpdate) {
         let bool = val === '1' ? true : false;
         console.log('sendComponentUpdate', deviceid, devicetype, bool);
