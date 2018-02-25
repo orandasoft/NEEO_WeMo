@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Paul Spee
+// Copyright (c) 2018 Paul Spee 
 //
 
 'use strict';
