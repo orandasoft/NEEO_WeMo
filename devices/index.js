@@ -2,6 +2,4 @@
 
 const WeMoDevice = require('./WeMoDevice');
 
-module.exports = [
-  WeMoDevice,
-];
+module.exports = WeMoDevice;
